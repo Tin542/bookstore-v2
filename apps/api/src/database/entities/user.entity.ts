@@ -5,11 +5,14 @@ import {
     CreateDateColumn,
     UpdateDateColumn,
     OneToMany,
+    ManyToOne,
+    JoinColumn,
   } from 'typeorm';
 import { Post } from './post.entity';
 import { Order } from './order.entity';
 import { Review } from './review.entity';
 import { CartItem } from './cart-item.entity';
+import { Role } from './role.entity';
 
 @Entity('user')
 export class User {
@@ -48,6 +51,10 @@ export class User {
 
   @UpdateDateColumn()
   updatedAt: Date;
+
+  @ManyToOne(() => Role, (role) => role.user)
+  @JoinColumn({ name: 'role' })
+  role: Role;
 
   @OneToMany(() => Post, (post) => post.user)
   post: Post[];
