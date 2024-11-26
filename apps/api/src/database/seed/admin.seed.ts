@@ -4,7 +4,7 @@ import { User } from '../entities/user.entity';
 import { hashPassword } from 'src/shared/utils/hash-password.util';
 import { ConfigService } from '@nestjs/config';
 import { Role } from '../entities/role.entity';
-import { ROLE } from 'src/shared/utils/constants';
+import { RoleEnum } from 'src/shared/enum';
 
 export async function AdminSeeder(
   dataSource: DataSource,
@@ -23,7 +23,7 @@ export async function AdminSeeder(
   const password = await hashPassword(defaultPassword);
   const role = await roleRepository.findOne({
     where: {
-      name: ROLE.ADMIN,
+      name: RoleEnum.Admin,
     },
   });
   if (!role) {

@@ -4,13 +4,14 @@ import {
     Column,
     ManyToOne,
     JoinColumn,
+    BaseEntity,
   } from 'typeorm';
   import { ApiProperty } from '@nestjs/swagger';
 import { Book } from './book.entity';
 import { Order } from './order.entity';
 
 @Entity('order_item')
-export class OrderItem {
+export class OrderItem extends BaseEntity {
   @ApiProperty({ example: 1 })
   @PrimaryGeneratedColumn()
   id: number;

@@ -5,12 +5,13 @@ import {
     CreateDateColumn,
     UpdateDateColumn,
     OneToMany,
+    BaseEntity,
   } from 'typeorm';
   import { ApiProperty } from '@nestjs/swagger';
 import { BookPromotionRelationship } from './book-promotion.entity';
 
 @Entity('promotion')
-export class Promotion {
+export class Promotion extends BaseEntity {
   @ApiProperty({ example: 1 })
   @PrimaryGeneratedColumn()
   id: number;

@@ -6,13 +6,14 @@ import {
     UpdateDateColumn,
     ManyToOne,
     JoinColumn,
+    BaseEntity,
   } from 'typeorm';
   import { ApiProperty } from '@nestjs/swagger';
 import { Book } from './book.entity';
 import { User } from './user.entity';
 
 @Entity('review')
-export class Review {
+export class Review extends BaseEntity {
   @ApiProperty({ example: 1 })
   @PrimaryGeneratedColumn()
   id: number;

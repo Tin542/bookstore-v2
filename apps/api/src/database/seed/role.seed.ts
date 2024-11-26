@@ -1,6 +1,7 @@
 import { DataSource } from 'typeorm';
 import { Role } from '../entities/role.entity';
 import { Logger } from '@nestjs/common';
+import { RoleEnum } from 'src/shared/enum';
 
 export async function RoleSeeder(dataSource: DataSource) {
   const logger = new Logger('Seeder');
@@ -10,9 +11,9 @@ export async function RoleSeeder(dataSource: DataSource) {
   const roleRepository = dataSource.getRepository(Role);
 
   const rolesToSeed = [
-    { name: 'ADMIN', createdAt: new Date() },
-    { name: 'MANAGER', createdAt: new Date() },
-    { name: 'CUSTOMER', createdAt: new Date() },
+    { name: RoleEnum.Admin, createdAt: new Date() },
+    { name: RoleEnum.Manager, createdAt: new Date() },
+    { name: RoleEnum.Customer, createdAt: new Date() },
   ];
 
   for (const roleData of rolesToSeed) {
