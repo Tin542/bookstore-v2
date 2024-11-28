@@ -1,3 +1,13 @@
+# dependencies
 node_modules
-# Keep environment variables out of version control
+dist
+
+# typescript
+*.tsbuildinfo
+next-env.d.ts
+
+# env local variables
 .env
+.env.staging
+.env.development
+.env.production

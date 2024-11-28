@@ -93,6 +93,14 @@ export class User extends BaseEntity {
   refreshToken: string;
 
   @ApiProperty({
+    description: 'Code for user activation',
+    example: null,
+    nullable: true,
+  })
+  @Column({nullable: true})
+  code: string;
+
+  @ApiProperty({
     description: 'Date and time when the user was created',
     example: '2024-11-25T12:34:56.789Z',
   })

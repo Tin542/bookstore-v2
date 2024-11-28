@@ -5,25 +5,20 @@ import {
   HttpCode,
   HttpStatus,
   Logger,
-  UseGuards,
-  Get,
-  Request,
 } from '@nestjs/common';
 import { AuthService } from '../services/auth.service';
-import { ApiBearerAuth, ApiBody } from '@nestjs/swagger';
+import { ApiBody } from '@nestjs/swagger';
 import { LoginDto } from '../dto/login.dto';
-import { Roles } from 'src/shared/decorators/auth/role.decorator';
-import { RoleEnum } from 'src/shared/enum';
-import { RolesGuard } from '../guard/role.guard';
 import { Public } from 'src/shared/decorators/auth/public.decorator';
+import { CreateUserDto } from 'src/modules/user/dto/user-create.dto';
 
-@Controller('auth')
+@Controller('api/auth')
 export class AuthController {
   constructor(private authService: AuthService) {}
 
   @HttpCode(HttpStatus.OK)
   @Public()
-  @Post('login')
+  @Post('/login')
   @ApiBody({ type: LoginDto })
   signIn(@Body() signInDto: LoginDto) {
     const logger = new Logger('Login');
@@ -38,9 +33,16 @@ export class AuthController {
     }
   }
 
-  @ApiBearerAuth()
-  @Get('profile')
-  getProfile(@Request() req: any) {
-    return req.user;
+  @Public()
+  @Post('/register')
+  @ApiBody({ type: CreateUserDto })
+  signUp(@Body() signUpDto: CreateUserDto) {
+    const logger = new Logger('Register');
+    try {
+      const result = this.authService.register(signUpDto);
+      return result;
+    } catch (error) {
+      logger.error(error.message);
+    }
   }
 }
